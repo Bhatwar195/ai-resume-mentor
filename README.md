@@ -12,7 +12,7 @@ AI Resume Mentor is an AI-powered web application that helps students and profes
 
 ## Demo
 
-**[Watch Demo Video](#)** — replace with your Loom or Google Drive link
+**[Watch Demo Video](#)** — [Google Drive link](https://drive.google.com/file/d/1PGd-SDOWJFmXJrXqvAY0WeiV6MpixDoE/view?usp=sharing)
 
 **[Live App](#)** - https://ai-resume-mentor.onrender.com/
 
