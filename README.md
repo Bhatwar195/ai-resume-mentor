@@ -5,9 +5,8 @@
 ![Groq](https://img.shields.io/badge/Groq-LLM-orange?style=flat-square)
 ![HTML](https://img.shields.io/badge/HTML5-CSS3-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=flat-square&logo=render&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
 
-An AI-powered resume analysis and coaching platform. Upload your resume and get instant feedback — ATS score, section-by-section analysis, improvement suggestions, and a built-in career coach chatbot.
+AI Resume Mentor is an AI-powered web application that helps students and professionals analyze and improve their resumes using Large Language Models (LLMs). The platform allows users to upload their resume and optionally provide a job description, after which the system evaluates the resume, identifies missing skills, and generates actionable suggestions for improvement.
 
 ---
 
@@ -15,7 +14,7 @@ An AI-powered resume analysis and coaching platform. Upload your resume and get 
 
 **[Watch Demo Video](#)** — replace with your Loom or Google Drive link
 
-**[Live App](#)** — replace with your Render URL
+**[Live App](#)** - https://ai-resume-mentor.onrender.com/
 
 ---
 
@@ -109,3 +108,7 @@ Open `http://localhost:8000` in your browser.
 | POST | `/analyze` | Analyzes uploaded PDF resume |
 | POST | `/chat` | Resume coach chatbot |
 | GET | `/health` | Health check |
+
+---
+AI Resume Mentor helps users analyze, improve, and align their resumes with modern job requirements using AI.
+---
