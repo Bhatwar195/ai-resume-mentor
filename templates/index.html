@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Resume Mentor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────── -->
+<nav class="nav">
+  <a class="nav-logo" href="#">
+    <div class="nav-logomark">
+      <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    </div>
+    <span class="nav-wordmark">AI <span>Resume</span> Mentor</span>
+  </a>
+  <div class="nav-right">
+    <button class="nav-tab-btn active" id="nav-btn-analyze" onclick="showPage('analyze')">Analyzer</button>
+    <button class="nav-tab-btn" id="nav-btn-chat" onclick="showPage('chat')">Resume Coach</button>
+    <div class="nav-pill">Groq LLM</div>
+  </div>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-eyebrow">AI-Powered Career Tool</div>
+  <h1>Analyze, Optimize &amp;<br/><em>Land Your Dream Role</em></h1>
+  <p>Upload your resume for instant AI analysis — scoring, ATS optimization, keyword extraction, and personalized coaching.</p>
+  <div class="hero-stats">
+    <div><div class="hero-stat-val">10s</div><div class="hero-stat-lbl">Analysis Time</div></div>
+    <div><div class="hero-stat-val">ATS</div><div class="hero-stat-lbl">Optimization</div></div>
+    <div><div class="hero-stat-val">6+</div><div class="hero-stat-lbl">Resume Sections</div></div>
+    <div><div class="hero-stat-val">AI</div><div class="hero-stat-lbl">Resume Coach</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PAGE: ANALYZER                                      -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page active" id="page-analyze">
+  <div class="container">
+    <div class="two-col">
+
+      <!-- LEFT PANEL -->
+      <div>
+        <!-- Upload card -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            </div>
+            <div>
+              <div class="card-title">Upload Resume</div>
+              <div class="card-subtitle">PDF format only — max 5 MB</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" id="fileInput" accept=".pdf" />
+              <div class="upload-icon-wrap">
+                <svg viewBox="0 0 24 24"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <div class="upload-title">Drop your resume here</div>
+              <div class="upload-sub"><b>Click to browse</b> or drag and drop</div>
+            </div>
+            <div class="file-badge" id="fileBadge">
+              <svg width="16" height="16" viewBox="0 0 24 24" stroke="#1a56db" fill="none" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              <span class="file-badge-name" id="fileName"></span>
+              <button class="file-badge-remove" id="fileRemove" title="Remove file">&#10005;</button>
+            </div>
+            <div class="error-box" id="errorBox"></div>
+          </div>
+        </div>
+
+        <!-- Job targeting card -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="card-title">Target Job</div>
+              <div class="card-subtitle">Optional — improves alignment analysis</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label class="label">Job Title <span class="opt-tag">optional</span></label>
+              <input type="text" class="input" id="jobTitle" placeholder="e.g. Software Engineer Intern" />
+            </div>
+            <div class="field">
+              <label class="label">Job Description <span class="opt-tag">optional</span></label>
+              <textarea class="textarea" id="jobDescription" placeholder="Paste the full job description to see gap analysis and alignment score..."></textarea>
+            </div>
+            <button class="btn btn-primary" id="analyzeBtn" onclick="analyzeResume()">
+              <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Analyze Resume
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div>
+        <div class="card">
+
+          <!-- Loading -->
+          <div class="loading-block" id="loadingBlock">
+            <div class="spinner"></div>
+            <p>Analyzing your resume...</p>
+            <small>The AI is reviewing your document. This takes about 10 seconds.</small>
+          </div>
+
+          <!-- Empty state -->
+          <div class="empty-block" id="emptyState">
+            <div class="empty-icon">
+              <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3>Your results will appear here</h3>
+            <p>Upload a PDF and click Analyze Resume to get started.</p>
+          </div>
+
+          <!-- Results -->
+          <div id="resultsArea" style="padding:20px;">
+
+            <!-- Resume Score -->
+            <div class="score-banner">
+              <div class="score-ring">
+                <svg viewBox="0 0 84 84">
+                  <circle class="score-ring-bg" cx="42" cy="42" r="34" fill="none" stroke-width="6"/>
+                  <circle class="score-ring-fill" id="scoreRingFill" cx="42" cy="42" r="34" fill="none" stroke-width="6"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                </svg>
+                <div class="score-ring-inner">
+                  <span class="score-ring-num" id="scoreNum">—</span>
+                  <span class="score-ring-den">/10</span>
+                </div>
+              </div>
+              <div class="score-banner-info">
+                <div class="score-eyebrow">Resume Score</div>
+                <div class="score-title" id="scoreTitle">—</div>
+                <div class="score-reason" id="scoreReason"></div>
+              </div>
+              <div class="score-jd-pill" id="jdScorePill" style="display:none"></div>
+            </div>
+
+            <!-- ATS Score Banner -->
+            <div class="ats-banner">
+              <div class="ats-score-box">
+                <div class="ats-score-val" id="atsScoreVal">—</div>
+                <div class="ats-score-max">/100 ATS</div>
+              </div>
+              <div class="ats-info" style="flex:1;">
+                <div class="ats-label-row">
+                  <span class="ats-badge fair" id="atsBadge">—</span>
+                </div>
+                <div class="ats-progress-track">
+                  <div class="ats-progress-fill fair" id="atsBar" style="width:0%"></div>
+                </div>
+                <div class="ats-reason" id="atsReason"></div>
+              </div>
+            </div>
+
+            <!-- Section Presence -->
+            <div style="margin-bottom:20px;">
+              <div class="sec-label" style="margin-bottom:8px;">Section Presence</div>
+              <div class="section-check-grid" id="sectionChecks"></div>
+            </div>
+
+            <!-- Professional Summary -->
+            <div class="summary-card">
+              <div class="summary-eyebrow">AI-Generated Professional Summary</div>
+              <div class="summary-text" id="summaryText"></div>
+              <button class="copy-btn" onclick="copySummary()">Copy</button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-bar">
+              <button class="tab-btn active" data-tab="skills"   onclick="switchTab('skills')">Skills</button>
+              <button class="tab-btn"         data-tab="feedback" onclick="switchTab('feedback')">Feedback</button>
+              <button class="tab-btn"         data-tab="improve"  onclick="switchTab('improve')">Improvements</button>
+              <button class="tab-btn"         data-tab="ats"      onclick="switchTab('ats')">ATS Detail</button>
+              <button class="tab-btn"         data-tab="jd"       onclick="switchTab('jd')">JD Match</button>
+            </div>
+
+            <!-- Pane: Skills -->
+            <div class="tab-pane active" id="pane-skills">
+              <div class="sec-label">Extracted Skills</div>
+              <div class="chips" id="skillsChips"></div>
+              <div class="divider"></div>
+              <div class="sec-label">Key Keywords Found</div>
+              <div class="chips" id="keywordsChips"></div>
+              <div class="divider"></div>
+              <div class="sec-label">Missing ATS Keywords</div>
+              <div class="chips" id="atsKeywordsChips"></div>
+              <div class="divider"></div>
+              <div class="sec-label">Identified Strengths</div>
+              <div id="strengthsList"></div>
+            </div>
+
+            <!-- Pane: Feedback -->
+            <div class="tab-pane" id="pane-feedback">
+              <div id="feedbackList"></div>
+            </div>
+
+            <!-- Pane: Improvements -->
+            <div class="tab-pane" id="pane-improve">
+              <div id="improvementsList"></div>
+            </div>
+
+            <!-- Pane: ATS Detail -->
+            <div class="tab-pane" id="pane-ats">
+              <div class="sec-label">Formatting Issues</div>
+              <div id="atsFmtList"></div>
+              <div class="divider"></div>
+              <div class="sec-label">Missing ATS Keywords</div>
+              <div class="chips" id="atsDetailKeywords"></div>
+              <div class="divider"></div>
+              <div class="sec-label">Keyword Density Tips</div>
+              <div id="atsDensityList"></div>
+            </div>
+
+            <!-- Pane: JD Match -->
+            <div class="tab-pane" id="pane-jd">
+              <div id="jdContent"></div>
+            </div>
+
+          </div>
+          <!-- /resultsArea -->
+
+        </div>
+      </div>
+      <!-- /right panel -->
+
+    </div>
+  </div>
+</div>
+<!-- /page-analyze -->
+
+
+<!-- ════════════════════════════════════════════════════ -->
+<!-- PAGE: CHAT                                          -->
+<!-- ════════════════════════════════════════════════════ -->
+<div class="page" id="page-chat">
+  <div class="container">
+    <div class="chat-layout">
+
+      <!-- Sidebar -->
+      <div>
+        <div class="card chat-context-card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <div class="card-title">Session Context</div>
+              <div class="card-subtitle">Auto-loaded from analyzer</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="chatContextInfo" style="font-size:0.8rem;color:var(--grey-500);">
+              No resume analyzed yet.
+            </div>
+            <div class="divider"></div>
+            <div class="sec-label">Target Role</div>
+            <div id="chatJobTitle" style="font-size:0.83rem;color:var(--grey-700);font-weight:500;">Not set</div>
+            <div class="divider"></div>
+            <div class="sec-label">Suggested Questions</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <button class="suggestion-chip" onclick="sendSuggestion('How can I improve my resume summary?')">Improve my summary</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('Which skills should I add to my resume?')">Skills to add</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('How do I make my resume more ATS-friendly?')">ATS optimization tips</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('Rewrite one of my bullet points to be more impactful.')">Rewrite a bullet point</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('What projects should I add based on my skills?')">Project suggestions</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('How do I tailor my resume for this job description?')">Tailor for JD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat window -->
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-avatar">
+            <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          </div>
+          <div>
+            <div class="chat-header-name">Resume Coach</div>
+            <div class="chat-header-sub">Ask anything about your resume or career</div>
+          </div>
+          <div class="chat-status">
+            <div class="chat-status-dot"></div>
+            Online
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-msg assistant">
+            <div class="msg-avatar ai">
+              <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div>
+              <div class="msg-bubble">Hello! I am your AI Resume Coach. I can help you improve your resume, strengthen bullet points, optimize for ATS systems, and align your profile with job descriptions.<br/><br/>If you have already analyzed your resume, I have context from that session. Otherwise, feel free to ask me anything about resume writing or career preparation.</div>
+              <div class="msg-time">Now</div>
+            </div>
+          </div>
+          <div class="chat-typing" id="chatTyping">
+            <div class="msg-avatar ai">
+              <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <div class="typing-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="suggestion-chips">
+          <span class="suggestion-chip" onclick="sendSuggestion('Review my resume score and explain it.')">Explain my score</span>
+          <span class="suggestion-chip" onclick="sendSuggestion('What are my top 3 resume weaknesses?')">Top weaknesses</span>
+          <span class="suggestion-chip" onclick="sendSuggestion('Write a stronger professional summary for me.')">Write my summary</span>
+        </div>
+
+        <div class="chat-input-row">
+          <textarea
+            class="chat-textarea"
+            id="chatInput"
+            placeholder="Ask about your resume, career advice, interview prep..."
+            rows="1"
+          ></textarea>
+          <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- /page-chat -->
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
