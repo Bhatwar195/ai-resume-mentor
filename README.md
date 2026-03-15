@@ -111,4 +111,3 @@ Open `http://localhost:8000` in your browser.
 
 ---
 AI Resume Mentor helps users analyze, improve, and align their resumes with modern job requirements using AI.
----
